@@ -135,6 +135,21 @@ public class Gameplay : Control
 
     private void OnCellPressed(Cell cell)
     {
+        void RevealNeighboringZeros(int x, int y)
+        {
+            var coordsToCheck = GetValidNeighborCoords(x, y);
+
+            foreach (var (cx, cy) in coordsToCheck)
+            {
+                var cellToCheck = _board[cx, cy];
+                if (cellToCheck.Type == CellType.Safe0 && !cellToCheck.Revealed)
+                {
+                    cellToCheck.Reveal();
+                    RevealNeighboringZeros(cx, cy);
+                }
+            }
+        }
+
         if (_firstMove)
         {
             InitBoard(cell.GridPosition);
@@ -148,11 +163,6 @@ public class Gameplay : Control
         {
             RevealNeighboringZeros(position.Item1, position.Item2);
         }
-    }
-
-    private void RevealNeighboringZeros(int x, int y)
-    {
-
     }
 
     private Tuple<int, int>[] GetValidNeighborCoords(int x, int y)
