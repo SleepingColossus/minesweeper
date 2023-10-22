@@ -61,27 +61,10 @@ public class Gameplay : Control
         {
             var mineCount = 0;
 
-            var coordsToCheck = new Tuple<int, int>[]
+            var coordsToCheck = GetValidNeighborCoords(x, y);
+
+            foreach (var (cx, cy) in coordsToCheck)
             {
-                new Tuple<int, int>(x - 1, y - 1),  // top left
-                new Tuple<int, int>(x    , y - 1),  // top
-                new Tuple<int, int>(x + 1, y - 1),  // top right
-                new Tuple<int, int>(x - 1, y),      // left
-                new Tuple<int, int>(x + 1, y),      // right
-                new Tuple<int, int>(x - 1, y + 1),  // bottom left
-                new Tuple<int, int>(x    , y + 1),  // bottom
-                new Tuple<int, int>(x + 1, y + 1),  // bottom right
-            };
-
-            foreach (var coordinates in coordsToCheck)
-            {
-                var cx = coordinates.Item1;
-                var cy = coordinates.Item2;
-
-                // skip if cells are out of bounds
-                if (cx < 0 || cx >= _gridWidth) { continue; }
-                if (cy < 0 || cy >= _gridHeight) { continue; }
-
                 if (knownMineLocations[cx, cy])
                 {
                     mineCount++;
@@ -170,5 +153,34 @@ public class Gameplay : Control
     private void RevealNeighboringZeros(int x, int y)
     {
 
+    }
+
+    private Tuple<int, int>[] GetValidNeighborCoords(int x, int y)
+    {
+        bool IsCoordinateValid(Tuple<int, int> coordinates)
+        {
+            var cx = coordinates.Item1;
+            var cy = coordinates.Item2;
+
+            // skip if cells are out of bounds
+            if (cx < 0 || cx >= _gridWidth) { return false; }
+            if (cy < 0 || cy >= _gridHeight) { return false; }
+
+            return true;
+        }
+
+        return new[]
+        {
+            new Tuple<int, int>(x - 1, y - 1),  // top left
+            new Tuple<int, int>(x    , y - 1),  // top
+            new Tuple<int, int>(x + 1, y - 1),  // top right
+            new Tuple<int, int>(x - 1, y),      // left
+            new Tuple<int, int>(x + 1, y),      // right
+            new Tuple<int, int>(x - 1, y + 1),  // bottom left
+            new Tuple<int, int>(x    , y + 1),  // bottom
+            new Tuple<int, int>(x + 1, y + 1),  // bottom right
+        }
+            .Where(IsCoordinateValid)
+            .ToArray();
     }
 }
