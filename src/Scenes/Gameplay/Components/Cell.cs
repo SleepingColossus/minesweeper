@@ -30,4 +30,10 @@ public class Cell : TextureButton
         if (cellType == CellType.MineLose) { TextureNormal = TextureMineLose; }
         if (cellType == CellType.MineReveal) { TextureNormal = TextureMineReveal; }
     }
+
+    // does nothing practical
+    // just suppresses stupid Godot errors
+    private void _on_Cell_pressed()
+    {
+    }
 }
