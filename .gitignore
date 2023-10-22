@@ -1,10 +1,18 @@
-/.internal
-/build
-.externalToolBuilders
-.DS_Store
-Thumbs.db
-.lock-wscript
-*.pyc
-.project
-.cproject
-builtins
+# Godot 4+ specific ignores
+.godot/
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# Visual Studio Code specific ignores
+.vs/
