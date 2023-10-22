@@ -8,11 +8,12 @@ public class Gameplay : Control
 {
     [Export] public PackedScene CellScene;
 
+    private bool _firstMove = true;
     private int _gridWidth = 9;
     private int _gridHeight = 9;
     private int _numberOfMines = 10;
 
-    private CellType[,] _board;
+    private Cell[,] _board;
 
     public override void _Ready()
     {
@@ -20,6 +21,8 @@ public class Gameplay : Control
 
         gridContainer.Columns = _gridWidth;
         Vector2 textureSize = Vector2.Zero;
+
+        var cells = new Cell[_gridWidth, _gridHeight];
 
         for (int x = 0; x < _gridWidth; x++)
         {
@@ -29,10 +32,12 @@ public class Gameplay : Control
                 cell.GridPosition = new Vector2(x, y);
                 cell.Connect("pressed", this, "OnCellPressed", new Godot.Collections.Array(cell));
                 textureSize = cell.TextureNormal.GetSize();
-
+                cells[x, y] = cell;
                 gridContainer.AddChild(cell);
             }
         }
+
+        _board = cells;
 
         // center grid container
         gridContainer.AnchorLeft = 0.5f;
@@ -119,29 +124,27 @@ public class Gameplay : Control
         }
 
         // pass 2: set neighbors
-        _board = new CellType[_gridWidth, _gridHeight];
-
         for (int x = 0; x < _gridWidth; x++)
         {
             for (int y = 0; y < _gridHeight; y++)
             {
                 if (mineLocations[x, y])
                 {
-                    _board[x, y] = CellType.Mine;
+                    _board[x, y].SetType(CellType.Mine);
                 }
                 else
                 {
                     var count = CountNeighboringMines(x, y, mineLocations);
 
-                    if (count == 0) { _board[x,y] = CellType.Safe0; }
-                    if (count == 1) { _board[x,y] = CellType.Safe1; }
-                    if (count == 2) { _board[x,y] = CellType.Safe2; }
-                    if (count == 3) { _board[x,y] = CellType.Safe3; }
-                    if (count == 4) { _board[x,y] = CellType.Safe4; }
-                    if (count == 5) { _board[x,y] = CellType.Safe5; }
-                    if (count == 6) { _board[x,y] = CellType.Safe6; }
-                    if (count == 7) { _board[x,y] = CellType.Safe7; }
-                    if (count == 8) { _board[x,y] = CellType.Safe8; }
+                    if (count == 0) { _board[x,y].SetType(CellType.Safe0); }
+                    if (count == 1) { _board[x,y].SetType(CellType.Safe1); }
+                    if (count == 2) { _board[x,y].SetType(CellType.Safe2); }
+                    if (count == 3) { _board[x,y].SetType(CellType.Safe3); }
+                    if (count == 4) { _board[x,y].SetType(CellType.Safe4); }
+                    if (count == 5) { _board[x,y].SetType(CellType.Safe5); }
+                    if (count == 6) { _board[x,y].SetType(CellType.Safe6); }
+                    if (count == 7) { _board[x,y].SetType(CellType.Safe7); }
+                    if (count == 8) { _board[x,y].SetType(CellType.Safe8); }
                 }
             }
         }
@@ -149,17 +152,16 @@ public class Gameplay : Control
 
     private void OnCellPressed(Cell cell)
     {
-        // initialize mines if first click
-        if (_board == null)
+        if (_firstMove)
         {
             InitBoard(cell.GridPosition);
+            _firstMove = false;
         }
 
         var position = cell.GridPosition.ToIntVector();
-        var cellType = _board[position.Item1, position.Item2];
-        cell.SetTexture(cellType);
+        cell.Reveal();
 
-        if (cellType == CellType.Safe0)
+        if (cell.Type == CellType.Safe0)
         {
             RevealNeighboringZeros(position.Item1, position.Item2);
         }

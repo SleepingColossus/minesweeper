@@ -17,21 +17,24 @@ public class Cell : TextureButton
     [Export] public Texture TextureMineReveal;
 
     public bool Revealed { get; private set; }
+    public CellType Type { get; private set; }
 
-    public void SetTexture(CellType cellType)
+    public void SetType(CellType type) => Type = type;
+
+    public void Reveal()
     {
         Revealed = true;
 
-        if (cellType == CellType.Safe0) { TextureNormal = Texture0; }
-        if (cellType == CellType.Safe1) { TextureNormal = Texture1; }
-        if (cellType == CellType.Safe2) { TextureNormal = Texture2; }
-        if (cellType == CellType.Safe3) { TextureNormal = Texture3; }
-        if (cellType == CellType.Safe4) { TextureNormal = Texture4; }
-        if (cellType == CellType.Safe5) { TextureNormal = Texture5; }
-        if (cellType == CellType.Safe6) { TextureNormal = Texture6; }
-        if (cellType == CellType.Safe7) { TextureNormal = Texture7; }
-        if (cellType == CellType.Safe8) { TextureNormal = Texture8; }
-        if (cellType == CellType.Mine) { TextureNormal = TextureMineLose; }
+        if (Type == CellType.Safe0) { TextureNormal = Texture0; }
+        if (Type == CellType.Safe1) { TextureNormal = Texture1; }
+        if (Type == CellType.Safe2) { TextureNormal = Texture2; }
+        if (Type == CellType.Safe3) { TextureNormal = Texture3; }
+        if (Type == CellType.Safe4) { TextureNormal = Texture4; }
+        if (Type == CellType.Safe5) { TextureNormal = Texture5; }
+        if (Type == CellType.Safe6) { TextureNormal = Texture6; }
+        if (Type == CellType.Safe7) { TextureNormal = Texture7; }
+        if (Type == CellType.Safe8) { TextureNormal = Texture8; }
+        if (Type == CellType.Mine) { TextureNormal = TextureMineLose; }
         //if (cellType == CellType.MineReveal) { TextureNormal = TextureMineReveal; }
     }
 
