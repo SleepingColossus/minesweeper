@@ -16,8 +16,12 @@ public class Cell : TextureButton
     [Export] public Texture TextureMineLose;
     [Export] public Texture TextureMineReveal;
 
+    public bool Revealed { get; private set; }
+
     public void SetTexture(CellType cellType)
     {
+        Revealed = true;
+
         if (cellType == CellType.Safe0) { TextureNormal = Texture0; }
         if (cellType == CellType.Safe1) { TextureNormal = Texture1; }
         if (cellType == CellType.Safe2) { TextureNormal = Texture2; }
@@ -27,8 +31,8 @@ public class Cell : TextureButton
         if (cellType == CellType.Safe6) { TextureNormal = Texture6; }
         if (cellType == CellType.Safe7) { TextureNormal = Texture7; }
         if (cellType == CellType.Safe8) { TextureNormal = Texture8; }
-        if (cellType == CellType.MineLose) { TextureNormal = TextureMineLose; }
-        if (cellType == CellType.MineReveal) { TextureNormal = TextureMineReveal; }
+        if (cellType == CellType.Mine) { TextureNormal = TextureMineLose; }
+        //if (cellType == CellType.MineReveal) { TextureNormal = TextureMineReveal; }
     }
 
     // does nothing practical

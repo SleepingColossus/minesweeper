@@ -1,9 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using Godot.Collections;
 using Minesweeper.Constants;
 
 public class Gameplay : Control
@@ -14,7 +12,7 @@ public class Gameplay : Control
     private int _gridHeight = 9;
     private int _numberOfMines = 10;
 
-    private bool[,] _mineLocations = null;
+    private CellType[,] _board;
 
     public override void _Ready()
     {
@@ -52,8 +50,43 @@ public class Gameplay : Control
         AddChild(gridContainer);
     }
 
-    private void InitMines(Vector2 exclude)
+    private void InitBoard(Vector2 exclude)
     {
+        int CountNeighboringMines(int x, int y, bool[,] knownMineLocations)
+        {
+            var mineCount = 0;
+
+            var coordsToCheck = new Tuple<int, int>[]
+            {
+                new Tuple<int, int>(x - 1, y - 1),  // top left
+                new Tuple<int, int>(x    , y - 1),  // top
+                new Tuple<int, int>(x + 1, y - 1),  // top right
+                new Tuple<int, int>(x - 1, y),      // left
+                new Tuple<int, int>(x + 1, y),      // right
+                new Tuple<int, int>(x - 1, y + 1),  // bottom left
+                new Tuple<int, int>(x    , y + 1),  // bottom
+                new Tuple<int, int>(x + 1, y + 1),  // bottom right
+            };
+
+            foreach (var coordinates in coordsToCheck)
+            {
+                var cx = coordinates.Item1;
+                var cy = coordinates.Item2;
+
+                // skip if cells are out of bounds
+                if (cx < 0 || cx >= _gridWidth) { continue; }
+                if (cy < 0 || cy >= _gridHeight) { continue; }
+
+                if (knownMineLocations[cx, cy])
+                {
+                    mineCount++;
+                }
+            }
+
+            return mineCount;
+        }
+
+        // pass 1: set mines
         var uniqueMines = new HashSet<Vector2>();
         var rng = new Random();
 
@@ -77,79 +110,63 @@ public class Gameplay : Control
             uniqueMines.Add(mine);
         }
 
-        _mineLocations = new bool[_gridWidth, _gridHeight];
+        var mineLocations = new bool[_gridWidth, _gridHeight];
         var uniqueMineList = uniqueMines.ToList();
 
         foreach (var mine in uniqueMineList)
         {
-            _mineLocations[(int)mine.x, (int)mine.y] = true;
+            mineLocations[(int)mine.x, (int)mine.y] = true;
+        }
+
+        // pass 2: set neighbors
+        _board = new CellType[_gridWidth, _gridHeight];
+
+        for (int x = 0; x < _gridWidth; x++)
+        {
+            for (int y = 0; y < _gridHeight; y++)
+            {
+                if (mineLocations[x, y])
+                {
+                    _board[x, y] = CellType.Mine;
+                }
+                else
+                {
+                    var count = CountNeighboringMines(x, y, mineLocations);
+
+                    if (count == 0) { _board[x,y] = CellType.Safe0; }
+                    if (count == 1) { _board[x,y] = CellType.Safe1; }
+                    if (count == 2) { _board[x,y] = CellType.Safe2; }
+                    if (count == 3) { _board[x,y] = CellType.Safe3; }
+                    if (count == 4) { _board[x,y] = CellType.Safe4; }
+                    if (count == 5) { _board[x,y] = CellType.Safe5; }
+                    if (count == 6) { _board[x,y] = CellType.Safe6; }
+                    if (count == 7) { _board[x,y] = CellType.Safe7; }
+                    if (count == 8) { _board[x,y] = CellType.Safe8; }
+                }
+            }
         }
     }
 
     private void OnCellPressed(Cell cell)
     {
         // initialize mines if first click
-        if (_mineLocations == null)
+        if (_board == null)
         {
-            InitMines(cell.GridPosition);
+            InitBoard(cell.GridPosition);
         }
 
         var position = cell.GridPosition.ToIntVector();
+        var cellType = _board[position.Item1, position.Item2];
+        cell.SetTexture(cellType);
 
-        bool isMine = _mineLocations[position.Item1, position.Item2];
-
-        if (isMine)
+        if (cellType == CellType.Safe0)
         {
-            cell.SetTexture(CellType.MineLose);
-        }
-        else
-        {
-            var cellType = CountNeighboringMines(position.Item1, position.Item2);
-            cell.SetTexture(cellType);
+            RevealNeighboringZeros(position.Item1, position.Item2);
         }
     }
 
-    private CellType CountNeighboringMines(int x, int y)
+    private void RevealNeighboringZeros(int x, int y)
     {
-        var mineCount = 0;
 
-        var coordsToCheck = new Tuple<int, int>[]
-        {
-            new Tuple<int, int>(x - 1, y - 1),  // top left
-            new Tuple<int, int>(x    , y - 1),  // top
-            new Tuple<int, int>(x + 1, y - 1),  // top right
-            new Tuple<int, int>(x - 1, y),      // left
-            new Tuple<int, int>(x + 1, y),      // right
-            new Tuple<int, int>(x - 1, y + 1),  // bottom left
-            new Tuple<int, int>(x    , y + 1),  // bottom
-            new Tuple<int, int>(x + 1, y + 1),  // bottom right
-        };
-
-        foreach (var coordinates in coordsToCheck)
-        {
-            var cx = coordinates.Item1;
-            var cy = coordinates.Item2;
-
-            // skip if cells are out of bounds
-            if (cx < 0 || cx >= _gridWidth) { continue; }
-            if (cy < 0 || cy >= _gridHeight) { continue; }
-
-            if (_mineLocations[cx, cy])
-            {
-                mineCount++;
-            }
-        }
-
-        if (mineCount == 0) { return CellType.Safe0; }
-        if (mineCount == 1) { return CellType.Safe1; }
-        if (mineCount == 2) { return CellType.Safe2; }
-        if (mineCount == 3) { return CellType.Safe3; }
-        if (mineCount == 4) { return CellType.Safe4; }
-        if (mineCount == 5) { return CellType.Safe5; }
-        if (mineCount == 6) { return CellType.Safe6; }
-        if (mineCount == 7) { return CellType.Safe7; }
-        if (mineCount == 8) { return CellType.Safe8; }
-
-        throw new InvalidEnumArgumentException();
     }
 }

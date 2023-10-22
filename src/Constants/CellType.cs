@@ -11,7 +11,6 @@
         Safe6,
         Safe7,
         Safe8,
-        MineLose,
-        MineReveal,
+        Mine,
     }
 }
