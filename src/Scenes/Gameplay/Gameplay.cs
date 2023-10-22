@@ -8,7 +8,7 @@ using Minesweeper.Constants;
 
 public class Gameplay : Control
 {
-    [Export()] public PackedScene CellScene;
+    [Export] public PackedScene CellScene;
 
     private int _gridWidth = 9;
     private int _gridHeight = 9;

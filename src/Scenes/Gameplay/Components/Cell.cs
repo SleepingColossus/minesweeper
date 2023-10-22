@@ -3,18 +3,18 @@ using Minesweeper.Constants;
 
 public class Cell : TextureButton
 {
-    [Export()] public Vector2 GridPosition = Vector2.Zero;
-    [Export()] public Texture Texture0;
-    [Export()] public Texture Texture1;
-    [Export()] public Texture Texture2;
-    [Export()] public Texture Texture3;
-    [Export()] public Texture Texture4;
-    [Export()] public Texture Texture5;
-    [Export()] public Texture Texture6;
-    [Export()] public Texture Texture7;
-    [Export()] public Texture Texture8;
-    [Export()] public Texture TextureMineLose;
-    [Export()] public Texture TextureMineReveal;
+    [Export] public Vector2 GridPosition = Vector2.Zero;
+    [Export] public Texture Texture0;
+    [Export] public Texture Texture1;
+    [Export] public Texture Texture2;
+    [Export] public Texture Texture3;
+    [Export] public Texture Texture4;
+    [Export] public Texture Texture5;
+    [Export] public Texture Texture6;
+    [Export] public Texture Texture7;
+    [Export] public Texture Texture8;
+    [Export] public Texture TextureMineLose;
+    [Export] public Texture TextureMineReveal;
 
     public void SetTexture(CellType cellType)
     {
