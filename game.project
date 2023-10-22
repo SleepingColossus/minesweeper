@@ -5,12 +5,14 @@ main_collection = /main/main.collectionc
 shared_state = 1
 
 [display]
-width = 960
-height = 640
+width = 1920
+height = 1080
 
 [android]
 input_method = HiddenInputField
 
 [project]
 title = Minesweeper
+publisher = Sleeping Colossus Limited
+developer = Sleeping Colossus Limited
 
