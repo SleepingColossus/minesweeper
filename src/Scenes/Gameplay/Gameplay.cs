@@ -142,10 +142,14 @@ public class Gameplay : Control
             foreach (var (cx, cy) in coordsToCheck)
             {
                 var cellToCheck = _board[cx, cy];
-                if (cellToCheck.Type == CellType.Safe0 && !cellToCheck.Revealed)
+                if (!cellToCheck.Revealed)
                 {
                     cellToCheck.Reveal();
-                    RevealNeighboringZeros(cx, cy);
+
+                    if (cellToCheck.Type == CellType.Safe0)
+                    {
+                        RevealNeighboringZeros(cx, cy);
+                    }
                 }
             }
         }
