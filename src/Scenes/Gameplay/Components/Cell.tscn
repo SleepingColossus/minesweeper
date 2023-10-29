@@ -17,6 +17,7 @@
 [node name="Cell" type="TextureButton"]
 margin_right = 1024.0
 margin_bottom = 600.0
+button_mask = 3
 texture_normal = ExtResource( 1 )
 script = ExtResource( 2 )
 Texture0 = ExtResource( 5 )

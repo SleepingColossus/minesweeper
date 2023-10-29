@@ -30,7 +30,7 @@ public class Gameplay : Control
             {
                 var cell = CellScene.Instance<Cell>();
                 cell.GridPosition = new Vector2(x, y);
-                cell.Connect("pressed", this, "OnCellPressed", new Godot.Collections.Array(cell));
+                cell.Connect("gui_input", this, "OnCellPressed", new Godot.Collections.Array(cell));
                 textureSize = cell.TextureNormal.GetSize();
                 cells[x, y] = cell;
                 gridContainer.AddChild(cell);
@@ -133,7 +133,26 @@ public class Gameplay : Control
         }
     }
 
-    private void OnCellPressed(Cell cell)
+    private void OnCellPressed(InputEvent evt, Cell cell)
+    {
+        if (evt is InputEventMouseButton)
+        {
+            var mouseEvent = (InputEventMouseButton)evt;
+            var buttonIndex = mouseEvent.ButtonIndex;
+
+            if (buttonIndex == 1 && mouseEvent.Pressed)
+            {
+                PrimaryAction(cell);
+            }
+
+            if (buttonIndex == 2 && mouseEvent.Pressed)
+            {
+                GD.Print("Right click");
+            }
+        }
+    }
+
+    private void PrimaryAction(Cell cell)
     {
         void RevealNeighboringZeros(int x, int y)
         {
@@ -167,6 +186,11 @@ public class Gameplay : Control
         {
             RevealNeighboringZeros(position.Item1, position.Item2);
         }
+    }
+
+    private void SecondaryAction(Cell cell)
+    {
+
     }
 
     private Tuple<int, int>[] GetValidNeighborCoords(int x, int y)
