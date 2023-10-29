@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://Assets/CelHidden.png" type="Texture" id=1]
+[ext_resource path="res://Assets/CelDefault.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Gameplay/Components/Cell.cs" type="Script" id=2]
 [ext_resource path="res://Assets/CellMineLose.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Cell7.png" type="Texture" id=4]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/Cell6.png" type="Texture" id=11]
 [ext_resource path="res://Assets/Cell4.png" type="Texture" id=12]
 [ext_resource path="res://Assets/Cell3.png" type="Texture" id=13]
+[ext_resource path="res://Assets/CellFlag.png" type="Texture" id=14]
 
 [node name="Cell" type="TextureButton"]
 margin_right = 1024.0
@@ -20,6 +21,8 @@ margin_bottom = 600.0
 button_mask = 3
 texture_normal = ExtResource( 1 )
 script = ExtResource( 2 )
+TextureDefault = ExtResource( 1 )
+TextureFlag = ExtResource( 14 )
 Texture0 = ExtResource( 5 )
 Texture1 = ExtResource( 9 )
 Texture2 = ExtResource( 10 )

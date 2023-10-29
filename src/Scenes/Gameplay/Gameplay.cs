@@ -147,13 +147,18 @@ public class Gameplay : Control
 
             if (buttonIndex == 2 && mouseEvent.Pressed)
             {
-                GD.Print("Right click");
+                SecondaryAction(cell);
             }
         }
     }
 
     private void PrimaryAction(Cell cell)
     {
+        if (cell.Flagged)
+        {
+            return;
+        }
+
         void RevealNeighboringZeros(int x, int y)
         {
             var coordsToCheck = GetValidNeighborCoords(x, y);
@@ -190,7 +195,7 @@ public class Gameplay : Control
 
     private void SecondaryAction(Cell cell)
     {
-
+        cell.ToggleFlag();
     }
 
     private Tuple<int, int>[] GetValidNeighborCoords(int x, int y)

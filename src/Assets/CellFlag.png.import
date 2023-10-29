@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CelHidden.png-ee33cfe5c023103dbbb0e07b0ed444db.stex"
+path="res://.import/CellFlag.png-2677be1bc3125f7b911e4ab52b1cb5a6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/CelHidden.png"
-dest_files=[ "res://.import/CelHidden.png-ee33cfe5c023103dbbb0e07b0ed444db.stex" ]
+source_file="res://Assets/CellFlag.png"
+dest_files=[ "res://.import/CellFlag.png-2677be1bc3125f7b911e4ab52b1cb5a6.stex" ]
 
 [params]
 
