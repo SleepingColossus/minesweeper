@@ -35,5 +35,6 @@ margin_left = 50.0
 margin_top = -55.0
 margin_right = -50.0
 margin_bottom = -24.0
+percent_visible = false
 
 [connection signal="pressed" from="ResetButton" to="." method="_on_TextureButton_pressed"]
