@@ -214,10 +214,10 @@ public class Gameplay : Control
         else if (cell.Type == CellType.Mine)
         {
             Lose();
-            RevealMines();
         }
 
         UpdateProgressBar();
+        CheckForVictory();
     }
 
     private void SecondaryAction(Cell cell)
@@ -259,11 +259,26 @@ public class Gameplay : Control
             .ToArray();
     }
 
+    public void CheckForVictory()
+    {
+        var total = GetNumberOfSafeCells();
+        var revealed = GetNumberOfRevealedCells();
+
+        if (total == revealed)
+        {
+            _gameState = GameState.GameOver;
+            var resetButton = GetNode<ResetButton>("ResetButton");
+            resetButton.SetWinTexture();
+            RevealMines();
+        }
+    }
+
     public void Lose()
     {
         _gameState = GameState.GameOver;
         var resetButton = GetNode<ResetButton>("ResetButton");
         resetButton.SetLoseTexture();
+        RevealMines();
     }
 
     private void RevealMines()
