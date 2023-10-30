@@ -6,6 +6,7 @@ public class Cell : TextureButton
     [Export] public Vector2 GridPosition = Vector2.Zero;
     [Export] public Texture TextureDefault;
     [Export] public Texture TextureFlag;
+    [Export] public Texture TextureFalseFlag;
     [Export] public Texture Texture0;
     [Export] public Texture Texture1;
     [Export] public Texture Texture2;
@@ -47,9 +48,14 @@ public class Cell : TextureButton
 
     public void RevealIfMine()
     {
-        if (Type != CellType.Mine)
+        if (!Flagged && Type != CellType.Mine)
         {
             return;
+        }
+
+        if (Flagged && Type != CellType.Mine)
+        {
+            TextureNormal = TextureFalseFlag;
         }
 
         if (!Revealed && !Flagged)
