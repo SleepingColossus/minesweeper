@@ -205,7 +205,7 @@ public class Gameplay : Control
         }
         else if (cell.Type == CellType.Mine)
         {
-            _gameState = GameState.GameOver;
+            Lose();
             RevealMines();
         }
     }
@@ -249,11 +249,23 @@ public class Gameplay : Control
             .ToArray();
     }
 
+    public void Lose()
+    {
+        _gameState = GameState.GameOver;
+        var resetButton = GetNode<ResetButton>("ResetButton");
+        resetButton.SetLoseTexture();
+    }
+
     private void RevealMines()
     {
         foreach (var cell in _board)
         {
             cell.RevealIfMine();
         }
+    }
+
+    private void _on_TextureButton_pressed()
+    {
+        GetTree().ReloadCurrentScene();
     }
 }
