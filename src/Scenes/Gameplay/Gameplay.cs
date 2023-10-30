@@ -6,9 +6,16 @@ using Minesweeper.Constants;
 
 public class Gameplay : Control
 {
+    private enum GameState
+    {
+        Ready,
+        Playing,
+        GameOver,
+    }
+
     [Export] public PackedScene CellScene;
 
-    private bool _firstMove = true;
+    private GameState _gameState = GameState.Ready;
     private int _gridWidth = 9;
     private int _gridHeight = 9;
     private int _numberOfMines = 10;
@@ -154,6 +161,11 @@ public class Gameplay : Control
 
     private void PrimaryAction(Cell cell)
     {
+        if (_gameState == GameState.GameOver)
+        {
+            return;
+        }
+
         if (cell.Flagged)
         {
             return;
@@ -178,10 +190,10 @@ public class Gameplay : Control
             }
         }
 
-        if (_firstMove)
+        if (_gameState == GameState.Ready)
         {
             InitBoard(cell.GridPosition);
-            _firstMove = false;
+            _gameState = GameState.Playing;
         }
 
         var position = cell.GridPosition.ToIntVector();
@@ -191,10 +203,19 @@ public class Gameplay : Control
         {
             RevealNeighboringZeros(position.Item1, position.Item2);
         }
+        else if (cell.Type == CellType.Mine)
+        {
+            _gameState = GameState.GameOver;
+        }
     }
 
     private void SecondaryAction(Cell cell)
     {
+        if (_gameState == GameState.GameOver)
+        {
+            return;
+        }
+
         cell.ToggleFlag();
     }
 
