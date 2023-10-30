@@ -206,6 +206,7 @@ public class Gameplay : Control
         else if (cell.Type == CellType.Mine)
         {
             _gameState = GameState.GameOver;
+            RevealMines();
         }
     }
 
@@ -246,5 +247,13 @@ public class Gameplay : Control
         }
             .Where(IsCoordinateValid)
             .ToArray();
+    }
+
+    private void RevealMines()
+    {
+        foreach (var cell in _board)
+        {
+            cell.RevealIfMine();
+        }
     }
 }

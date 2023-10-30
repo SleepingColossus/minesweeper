@@ -43,7 +43,19 @@ public class Cell : TextureButton
         if (Type == CellType.Safe7) { TextureNormal = Texture7; }
         if (Type == CellType.Safe8) { TextureNormal = Texture8; }
         if (Type == CellType.Mine) { TextureNormal = TextureMineLose; }
-        //if (cellType == CellType.MineReveal) { TextureNormal = TextureMineReveal; }
+    }
+
+    public void RevealIfMine()
+    {
+        if (Type != CellType.Mine)
+        {
+            return;
+        }
+
+        if (!Revealed && !Flagged)
+        {
+            TextureNormal = TextureMineReveal;
+        }
     }
 
     public void ToggleFlag()
