@@ -3,7 +3,6 @@ using Minesweeper.Constants;
 
 public class Cell : TextureButton
 {
-    [Export] public Vector2 GridPosition = Vector2.Zero;
     [Export] private Texture TextureDefault;
     [Export] private Texture TextureFlag;
     [Export] private Texture TextureFalseFlag;
@@ -19,6 +18,7 @@ public class Cell : TextureButton
     [Export] private Texture TextureMineLose;
     [Export] private Texture TextureMineReveal;
 
+    public Vector2 GridPosition = Vector2.Zero;
     public bool Revealed { get; private set; }
     public bool Flagged { get; private set; }
     public CellType Type { get; private set; }
