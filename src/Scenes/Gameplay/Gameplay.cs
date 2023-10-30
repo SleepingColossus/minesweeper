@@ -22,6 +22,8 @@ public class Gameplay : Control
 
     private Cell[,] _board;
 
+    private ProgressBar _progressBar;
+
     public override void _Ready()
     {
         var gridContainer = new GridContainer();
@@ -60,6 +62,10 @@ public class Gameplay : Control
         gridContainer.MarginBottom = totalTextureSize.y / 2;
 
         AddChild(gridContainer);
+
+        _progressBar = GetNode<ProgressBar>("ProgressBar");
+        _progressBar.MinValue = 0;
+        _progressBar.Value = 0;
     }
 
     private void InitBoard(Vector2 exclude)
@@ -138,6 +144,8 @@ public class Gameplay : Control
                 }
             }
         }
+
+        _progressBar.MaxValue = GetNumberOfSafeCells();
     }
 
     private void OnCellPressed(InputEvent evt, Cell cell)
@@ -208,6 +216,8 @@ public class Gameplay : Control
             Lose();
             RevealMines();
         }
+
+        UpdateProgressBar();
     }
 
     private void SecondaryAction(Cell cell)
@@ -262,6 +272,21 @@ public class Gameplay : Control
         {
             cell.RevealIfMine();
         }
+    }
+
+    private int GetNumberOfSafeCells()
+    {
+        return _board.Cast<Cell>().Count(cell => cell.Type != CellType.Mine);
+    }
+
+    private int GetNumberOfRevealedCells()
+    {
+        return _board.Cast<Cell>().Count(cell => cell.Type != CellType.Mine && cell.Revealed);
+    }
+
+    private void UpdateProgressBar()
+    {
+        _progressBar.Value = GetNumberOfRevealedCells();
     }
 
     private void _on_TextureButton_pressed()

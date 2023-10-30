@@ -27,4 +27,13 @@ script = ExtResource( 5 )
 WinTexture = ExtResource( 7 )
 LoseTexture = ExtResource( 6 )
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = -55.0
+margin_right = -50.0
+margin_bottom = -24.0
+
 [connection signal="pressed" from="ResetButton" to="." method="_on_TextureButton_pressed"]
