@@ -4,20 +4,20 @@ using Minesweeper.Constants;
 public class Cell : TextureButton
 {
     [Export] public Vector2 GridPosition = Vector2.Zero;
-    [Export] public Texture TextureDefault;
-    [Export] public Texture TextureFlag;
-    [Export] public Texture TextureFalseFlag;
-    [Export] public Texture Texture0;
-    [Export] public Texture Texture1;
-    [Export] public Texture Texture2;
-    [Export] public Texture Texture3;
-    [Export] public Texture Texture4;
-    [Export] public Texture Texture5;
-    [Export] public Texture Texture6;
-    [Export] public Texture Texture7;
-    [Export] public Texture Texture8;
-    [Export] public Texture TextureMineLose;
-    [Export] public Texture TextureMineReveal;
+    [Export] private Texture TextureDefault;
+    [Export] private Texture TextureFlag;
+    [Export] private Texture TextureFalseFlag;
+    [Export] private Texture Texture0;
+    [Export] private Texture Texture1;
+    [Export] private Texture Texture2;
+    [Export] private Texture Texture3;
+    [Export] private Texture Texture4;
+    [Export] private Texture Texture5;
+    [Export] private Texture Texture6;
+    [Export] private Texture Texture7;
+    [Export] private Texture Texture8;
+    [Export] private Texture TextureMineLose;
+    [Export] private Texture TextureMineReveal;
 
     public bool Revealed { get; private set; }
     public bool Flagged { get; private set; }
