@@ -11,6 +11,7 @@ config_version=4
 [application]
 
 config/name="Minesweeper"
+run/main_scene="res://Scenes/Menus/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [display]
