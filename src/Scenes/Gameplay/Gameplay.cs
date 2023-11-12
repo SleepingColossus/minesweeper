@@ -34,7 +34,7 @@ public class Gameplay : Control
 
         var gridContainer = new GridContainer();
 
-        gridContainer.Columns = _gridWidth;
+        gridContainer.Columns = _gridHeight;
         Vector2 textureSize = Vector2.Zero;
 
         var cells = new Cell[_gridWidth, _gridHeight];
@@ -60,7 +60,7 @@ public class Gameplay : Control
         gridContainer.AnchorTop = 0.5f;
         gridContainer.AnchorBottom = 0.5f;
 
-        var totalTextureSize = new Vector2(textureSize.x * _gridWidth, textureSize.y * _gridHeight);
+        var totalTextureSize = new Vector2(textureSize.x * _gridHeight, textureSize.y * _gridWidth);
 
         gridContainer.MarginLeft = -totalTextureSize.x / 2;
         gridContainer.MarginRight = totalTextureSize.x / 2;
