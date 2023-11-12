@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Themes/TitleTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Themes/ButtonTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Scenes/Menus/MainMenu.cs" type="Script" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -422.5
+margin_top = 56.0
+margin_right = 422.5
+margin_bottom = 204.0
+theme = ExtResource( 1 )
+text = "MINESWEEPER"
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -134.5
+margin_top = -253.0
+margin_right = 134.5
+margin_bottom = 253.0
+custom_constants/separation = 50
+
+[node name="Easy" type="Button" parent="Buttons"]
+margin_right = 269.0
+margin_bottom = 89.0
+theme = ExtResource( 2 )
+text = "Easy"
+
+[node name="Medium" type="Button" parent="Buttons"]
+margin_top = 139.0
+margin_right = 269.0
+margin_bottom = 228.0
+theme = ExtResource( 2 )
+text = "Medium"
+
+[node name="Expert" type="Button" parent="Buttons"]
+margin_top = 278.0
+margin_right = 269.0
+margin_bottom = 367.0
+theme = ExtResource( 2 )
+text = "Expert"
+
+[node name="Custom" type="Button" parent="Buttons"]
+margin_top = 417.0
+margin_right = 269.0
+margin_bottom = 506.0
+theme = ExtResource( 2 )
+text = "Custom"
+
+[connection signal="pressed" from="Buttons/Easy" to="." method="_on_Easy_pressed"]
+[connection signal="pressed" from="Buttons/Medium" to="." method="_on_Medium_pressed"]
+[connection signal="pressed" from="Buttons/Expert" to="." method="_on_Expert_pressed"]
+[connection signal="pressed" from="Buttons/Custom" to="." method="_on_Custom_pressed"]

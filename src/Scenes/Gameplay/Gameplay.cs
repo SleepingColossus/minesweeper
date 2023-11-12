@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Minesweeper.Constants;
+using Minesweeper.Scenes.Gameplay;
 
 public class Gameplay : Control
 {
@@ -16,9 +17,9 @@ public class Gameplay : Control
     [Export] public PackedScene CellScene;
 
     private GameState _gameState = GameState.Ready;
-    private int _gridWidth = 9;
-    private int _gridHeight = 9;
-    private int _numberOfMines = 10;
+    private int _gridWidth;
+    private int _gridHeight;
+    private int _numberOfMines;
 
     private Cell[,] _board;
 
@@ -26,6 +27,11 @@ public class Gameplay : Control
 
     public override void _Ready()
     {
+        var settings = Settings.GetInstance();
+        _gridWidth = settings.GridWidth;
+        _gridHeight = settings.GridHeight;
+        _numberOfMines = settings.NumberOfMines;
+
         var gridContainer = new GridContainer();
 
         gridContainer.Columns = _gridWidth;
