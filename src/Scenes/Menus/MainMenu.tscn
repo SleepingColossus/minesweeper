@@ -31,29 +31,29 @@ margin_bottom = 253.0
 custom_constants/separation = 50
 
 [node name="Easy" type="Button" parent="Buttons"]
-margin_right = 269.0
-margin_bottom = 89.0
+margin_right = 317.0
+margin_bottom = 113.0
 theme = ExtResource( 2 )
 text = "Easy"
 
 [node name="Medium" type="Button" parent="Buttons"]
-margin_top = 139.0
-margin_right = 269.0
-margin_bottom = 228.0
+margin_top = 163.0
+margin_right = 317.0
+margin_bottom = 276.0
 theme = ExtResource( 2 )
 text = "Medium"
 
 [node name="Expert" type="Button" parent="Buttons"]
-margin_top = 278.0
-margin_right = 269.0
-margin_bottom = 367.0
+margin_top = 326.0
+margin_right = 317.0
+margin_bottom = 439.0
 theme = ExtResource( 2 )
 text = "Expert"
 
 [node name="Custom" type="Button" parent="Buttons"]
-margin_top = 417.0
-margin_right = 269.0
-margin_bottom = 506.0
+margin_top = 489.0
+margin_right = 317.0
+margin_bottom = 602.0
 theme = ExtResource( 2 )
 text = "Custom"
 
