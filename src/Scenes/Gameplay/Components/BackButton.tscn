@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/BackButtonPressed.png" type="Texture" id=1]
+[ext_resource path="res://Assets/BackButtonNormal.png" type="Texture" id=2]
+[ext_resource path="res://Assets/BackButtonHover.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Gameplay/Components/BackButton.cs" type="Script" id=4]
+
+[node name="BackButton" type="TextureButton"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 1 )
+texture_hover = ExtResource( 3 )
+script = ExtResource( 4 )
+
+[connection signal="pressed" from="." to="." method="_on_BackButton_pressed"]
