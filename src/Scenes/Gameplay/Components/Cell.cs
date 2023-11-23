@@ -16,6 +16,7 @@ public class Cell : TextureButton
     [Export] private Texture Texture7;
     [Export] private Texture Texture8;
     [Export] private Texture TextureMineLose;
+    [Export] private Texture TextureMineLife;
     [Export] private Texture TextureMineReveal;
 
     public Vector2 GridPosition = Vector2.Zero;
@@ -44,6 +45,7 @@ public class Cell : TextureButton
         if (Type == CellType.Safe7) { TextureNormal = Texture7; }
         if (Type == CellType.Safe8) { TextureNormal = Texture8; }
         if (Type == CellType.Mine) { TextureNormal = TextureMineLose; }
+        if (Type == CellType.MineLife) { TextureNormal = TextureMineLife; }
     }
 
     public void RevealIfMine()

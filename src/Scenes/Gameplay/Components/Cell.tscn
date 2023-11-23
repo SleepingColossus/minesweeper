@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/CellDefault.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Gameplay/Components/Cell.cs" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Assets/Cell3.png" type="Texture" id=13]
 [ext_resource path="res://Assets/CellFlag.png" type="Texture" id=14]
 [ext_resource path="res://Assets/CellFalseFlag.png" type="Texture" id=15]
+[ext_resource path="res://Assets/CellMineLife.png" type="Texture" id=16]
 
 [node name="Cell" type="TextureButton"]
 margin_right = 64.0
@@ -35,6 +36,7 @@ Texture6 = ExtResource( 11 )
 Texture7 = ExtResource( 4 )
 Texture8 = ExtResource( 7 )
 TextureMineLose = ExtResource( 3 )
+TextureMineLife = ExtResource( 16 )
 TextureMineReveal = ExtResource( 6 )
 
 [connection signal="pressed" from="." to="." method="_on_Cell_pressed"]

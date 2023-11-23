@@ -20,11 +20,13 @@ public class Gameplay : Control
     private int _gridWidth;
     private int _gridHeight;
     private int _numberOfMines;
+    private int _remainingLives;
 
     private Cell[,] _board;
 
     private ProgressBar _progressBar;
     private ElapsedTime _elapsedTime;
+    private RemainingLives _remainingLivesLabel;
 
     private AudioStreamPlayer _sndMineLoseLife;
     private AudioStreamPlayer _sndMineGameOver;
@@ -35,6 +37,7 @@ public class Gameplay : Control
         _gridWidth = settings.GridWidth;
         _gridHeight = settings.GridHeight;
         _numberOfMines = settings.NumberOfMines;
+        _remainingLives = settings.NumberOfLives;
 
         var gridContainer = new GridContainer();
 
@@ -78,6 +81,8 @@ public class Gameplay : Control
         _progressBar.Value = 0;
 
         _elapsedTime = GetNode<ElapsedTime>("ElapsedTime");
+        _remainingLivesLabel = GetNode<RemainingLives>("RemainingLives");
+        _remainingLivesLabel.UpdateRemainingLives(_remainingLives);
 
         _sndMineLoseLife = GetNode<AudioStreamPlayer>("SoundMineLoseLife");
         _sndMineGameOver = GetNode<AudioStreamPlayer>("SoundMineGameOver");
@@ -221,7 +226,6 @@ public class Gameplay : Control
         }
 
         var position = cell.GridPosition.ToIntVector();
-        cell.Reveal();
 
         if (cell.Type == CellType.Safe0)
         {
@@ -229,8 +233,21 @@ public class Gameplay : Control
         }
         else if (cell.Type == CellType.Mine)
         {
-            Lose();
+            _remainingLives--;
+            _remainingLivesLabel.UpdateRemainingLives(_remainingLives);
+
+            if (_remainingLives == 0)
+            {
+                Lose();
+            }
+            else
+            {
+                PlaySound(_sndMineLoseLife);
+                cell.SetType(CellType.MineLife);
+            }
         }
+
+        cell.Reveal();
 
         UpdateProgressBar();
         CheckForVictory();

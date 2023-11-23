@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Gameplay/Gameplay.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Gameplay/Components/Cell.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Assets/MineGameOver.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Assets/MineLoseLife.ogg" type="AudioStream" id=11]
 [ext_resource path="res://Scenes/Gameplay/Components/ElapsedTime.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Gameplay/Components/RemainingLives.tscn" type="PackedScene" id=13]
 
 [node name="Gameplay" type="Control"]
 anchor_right = 1.0
@@ -69,6 +70,15 @@ anchor_bottom = 0.0
 margin_left = 295.0
 margin_top = 24.0
 margin_right = 585.0
+margin_bottom = 156.0
+
+[node name="RemainingLives" parent="." instance=ExtResource( 13 )]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -511.0
+margin_top = 24.0
+margin_right = -273.0
 margin_bottom = 156.0
 
 [connection signal="pressed" from="ResetButton" to="." method="_on_TextureButton_pressed"]

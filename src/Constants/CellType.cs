@@ -12,5 +12,6 @@
         Safe7,
         Safe8,
         Mine,
+        MineLife,
     }
 }

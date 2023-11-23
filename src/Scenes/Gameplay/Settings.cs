@@ -37,7 +37,7 @@
             }
             else if (difficulty == Difficulty.Expert)
             {
-                SetSettings(16, 30, 99, 1);
+                SetSettings(16, 30, 99, 2);
             }
             else
             {
