@@ -24,6 +24,7 @@ public class Gameplay : Control
     private Cell[,] _board;
 
     private ProgressBar _progressBar;
+    private ElapsedTime _elapsedTime;
 
     private AudioStreamPlayer _sndMineLoseLife;
     private AudioStreamPlayer _sndMineGameOver;
@@ -75,6 +76,8 @@ public class Gameplay : Control
         _progressBar = GetNode<ProgressBar>("ProgressBar");
         _progressBar.MinValue = 0;
         _progressBar.Value = 0;
+
+        _elapsedTime = GetNode<ElapsedTime>("ElapsedTime");
 
         _sndMineLoseLife = GetNode<AudioStreamPlayer>("SoundMineLoseLife");
         _sndMineGameOver = GetNode<AudioStreamPlayer>("SoundMineGameOver");
@@ -158,6 +161,7 @@ public class Gameplay : Control
         }
 
         _progressBar.MaxValue = GetNumberOfSafeCells();
+        _elapsedTime.Start();
     }
 
     private void OnCellPressed(InputEvent evt, Cell cell)
@@ -278,11 +282,17 @@ public class Gameplay : Control
 
         if (total == revealed)
         {
-            _gameState = GameState.GameOver;
-            var resetButton = GetNode<ResetButton>("ResetButton");
-            resetButton.SetWinTexture();
-            RevealMines();
+            Win();
         }
+    }
+
+    public void Win()
+    {
+        _gameState = GameState.GameOver;
+        var resetButton = GetNode<ResetButton>("ResetButton");
+        resetButton.SetWinTexture();
+        RevealMines();
+        _elapsedTime.Stop();
     }
 
     public void Lose()
@@ -292,6 +302,7 @@ public class Gameplay : Control
         resetButton.SetLoseTexture();
         RevealMines();
         PlaySound(_sndMineGameOver);
+        _elapsedTime.Stop();
     }
 
     private void RevealMines()
