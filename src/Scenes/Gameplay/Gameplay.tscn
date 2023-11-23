@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Gameplay/Gameplay.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/Gameplay/Components/Cell.tscn" type="PackedScene" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Assets/StatusButtonLose.png" type="Texture" id=6]
 [ext_resource path="res://Assets/StatusButtonWin.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Gameplay/Components/BackButton.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Gameplay/Components/SoundButton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/MineGameOver.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Assets/MineLoseLife.ogg" type="AudioStream" id=11]
 
 [node name="Gameplay" type="Control"]
 anchor_right = 1.0
@@ -43,5 +46,19 @@ margin_left = 24.0
 margin_top = 24.0
 margin_right = 174.0
 margin_bottom = 174.0
+
+[node name="SoundButton" parent="." instance=ExtResource( 9 )]
+anchor_left = 1.0
+anchor_bottom = 0.0
+margin_left = -174.0
+margin_top = 24.0
+margin_right = -24.0
+margin_bottom = 174.0
+
+[node name="SoundMineLoseLife" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="SoundMineGameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
 
 [connection signal="pressed" from="ResetButton" to="." method="_on_TextureButton_pressed"]

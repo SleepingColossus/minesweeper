@@ -9,6 +9,8 @@
         public int NumberOfMines { get; private set; }
         public int NumberOfLives { get; private set; }
 
+        public bool SoundEnabled { get; private set; } = true;
+
         private Settings() { }
 
         public static Settings GetInstance()
@@ -52,6 +54,12 @@
                 NumberOfMines = mines,
                 NumberOfLives = lives,
             };
+        }
+
+        public static void ToggleSound()
+        {
+            GetInstance();
+            _instance.SoundEnabled = !_instance.SoundEnabled;
         }
     }
 }

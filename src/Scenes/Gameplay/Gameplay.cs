@@ -25,6 +25,9 @@ public class Gameplay : Control
 
     private ProgressBar _progressBar;
 
+    private AudioStreamPlayer _sndMineLoseLife;
+    private AudioStreamPlayer _sndMineGameOver;
+
     public override void _Ready()
     {
         var settings = Settings.GetInstance();
@@ -72,6 +75,9 @@ public class Gameplay : Control
         _progressBar = GetNode<ProgressBar>("ProgressBar");
         _progressBar.MinValue = 0;
         _progressBar.Value = 0;
+
+        _sndMineLoseLife = GetNode<AudioStreamPlayer>("SoundMineLoseLife");
+        _sndMineGameOver = GetNode<AudioStreamPlayer>("SoundMineGameOver");
     }
 
     private void InitBoard(Vector2 exclude)
@@ -285,6 +291,7 @@ public class Gameplay : Control
         var resetButton = GetNode<ResetButton>("ResetButton");
         resetButton.SetLoseTexture();
         RevealMines();
+        PlaySound(_sndMineGameOver);
     }
 
     private void RevealMines()
@@ -308,6 +315,14 @@ public class Gameplay : Control
     private void UpdateProgressBar()
     {
         _progressBar.Value = GetNumberOfRevealedCells();
+    }
+
+    private void PlaySound(AudioStreamPlayer audio)
+    {
+        if (Settings.GetInstance().SoundEnabled)
+        {
+            audio.Play();
+        }
     }
 
     private void _on_TextureButton_pressed()
