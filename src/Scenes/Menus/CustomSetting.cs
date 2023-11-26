@@ -29,6 +29,11 @@ public class CustomSetting : HBoxContainer
         return int.Parse(_valueLabel.Text);
     }
 
+    public void SetValue(int value)
+    {
+        _valueLabel.Text = value.ToString();
+    }
+
     public void SetValidColor(bool isValid)
     {
         _valueLabel.Modulate = isValid ? Colors.White : Colors.Red;

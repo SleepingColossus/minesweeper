@@ -19,6 +19,13 @@ public class CustomGame : Control
         _lives = GetNode<CustomSetting>("Items/Lives");
         _startButton = GetNode<Button>("Start");
 
+        // load last used settings
+        var settings = Settings.GetInstance();
+        _width.SetValue(settings.GridWidth);
+        _height.SetValue(settings.GridHeight);
+        _mines.SetValue(settings.NumberOfMines);
+        _lives.SetValue(settings.NumberOfLives);
+
         _width.Connect(nameof(CustomSetting.ValueChanged), this, nameof(ValidateFields));
         _height.Connect(nameof(CustomSetting.ValueChanged), this, nameof(ValidateFields));
         _mines.Connect(nameof(CustomSetting.ValueChanged), this, nameof(ValidateFields));
