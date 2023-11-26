@@ -22,6 +22,11 @@ public class CustomSetting : HBoxContainer
         _valueLabel.Text = InitialValue.ToString();
     }
 
+    public int GetValue()
+    {
+        return int.Parse(_valueLabel.Text);
+    }
+
     private void _on_ButtonReduce_pressed()
     {
         var value = int.Parse(_valueLabel.Text);

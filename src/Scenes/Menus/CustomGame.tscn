@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Themes/TitleTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/Menus/CustomSetting.tscn" type="PackedScene" id=2]
@@ -6,10 +6,13 @@
 [ext_resource path="res://Assets/Height.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Mines.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Gameplay/Components/BackButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Themes/ButtonTheme.tres" type="Theme" id=7]
+[ext_resource path="res://Scenes/Menus/CustomGame.cs" type="Script" id=8]
 
 [node name="CustomGame" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 8 )
 
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.5
@@ -74,3 +77,17 @@ margin_left = 24.0
 margin_top = 24.0
 margin_right = 174.0
 margin_bottom = 174.0
+
+[node name="Start" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -158.5
+margin_top = -185.0
+margin_right = 158.5
+margin_bottom = -72.0
+theme = ExtResource( 7 )
+text = "Start"
+
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
