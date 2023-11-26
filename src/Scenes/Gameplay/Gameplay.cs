@@ -30,6 +30,7 @@ public class Gameplay : Control
 
     private AudioStreamPlayer _sndMineLoseLife;
     private AudioStreamPlayer _sndMineGameOver;
+    private AudioStreamPlayer _sndWin;
 
     public override void _Ready()
     {
@@ -86,6 +87,7 @@ public class Gameplay : Control
 
         _sndMineLoseLife = GetNode<AudioStreamPlayer>("SoundMineLoseLife");
         _sndMineGameOver = GetNode<AudioStreamPlayer>("SoundMineGameOver");
+        _sndWin = GetNode<AudioStreamPlayer>("SoundWin");
     }
 
     private void InitBoard(Vector2 exclude)
@@ -309,6 +311,7 @@ public class Gameplay : Control
         var resetButton = GetNode<ResetButton>("ResetButton");
         resetButton.SetWinTexture();
         RevealMines();
+        PlaySound(_sndWin);
         _elapsedTime.Stop();
     }
 
