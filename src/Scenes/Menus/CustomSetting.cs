@@ -2,6 +2,8 @@ using Godot;
 
 public class CustomSetting : HBoxContainer
 {
+    [Signal] public delegate void ValueChanged();
+
     [Export] private Texture Icon;
     [Export] private string Description;
     [Export] private int MinValue;
@@ -27,6 +29,11 @@ public class CustomSetting : HBoxContainer
         return int.Parse(_valueLabel.Text);
     }
 
+    public void SetValidColor(bool isValid)
+    {
+        _valueLabel.Modulate = isValid ? Colors.White : Colors.Red;
+    }
+
     private void _on_ButtonReduce_pressed()
     {
         var value = int.Parse(_valueLabel.Text);
@@ -35,6 +42,8 @@ public class CustomSetting : HBoxContainer
         {
             value--;
             _valueLabel.Text = value.ToString();
+
+            EmitSignal(nameof(ValueChanged));
         }
     }
 
@@ -47,6 +56,8 @@ public class CustomSetting : HBoxContainer
         {
             value++;
             _valueLabel.Text = value.ToString();
+
+            EmitSignal(nameof(ValueChanged));
         }
     }
 }
