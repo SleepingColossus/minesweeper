@@ -31,6 +31,6 @@ public class MainMenu : Node
 
     private void _on_Custom_pressed()
     {
-        GetTree().ChangeScene("");
+        GetTree().ChangeScene("res://Scenes/Menus/CustomGame.tscn");
     }
 }

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Themes/TitleTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Scenes/Menus/CustomSetting.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Heart.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Height.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Mines.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/Gameplay/Components/BackButton.tscn" type="PackedScene" id=6]
 
 [node name="CustomGame" type="Control"]
 anchor_right = 1.0
@@ -67,3 +68,9 @@ Icon = ExtResource( 3 )
 Description = "Lives"
 MinValue = 1
 InitialValue = 1
+
+[node name="BackButton" parent="." instance=ExtResource( 6 )]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 174.0
+margin_bottom = 174.0
