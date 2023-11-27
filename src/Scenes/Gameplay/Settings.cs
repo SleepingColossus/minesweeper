@@ -61,5 +61,20 @@
             GetInstance();
             _instance.SoundEnabled = !_instance.SoundEnabled;
         }
+
+        public float Scale
+        {
+            get
+            {
+                if (GridWidth > 10 || GridHeight > 10)
+                {
+                    return 0.5f;
+                }
+                else
+                {
+                    return 1f;
+                }
+            }
+        }
     }
 }

@@ -40,7 +40,9 @@ public class Gameplay : Control
         _numberOfMines = settings.NumberOfMines;
         _remainingLives = settings.NumberOfLives;
 
+        var scale = settings.Scale;
         var gridContainer = new GridContainer();
+        gridContainer.RectScale = new Vector2(scale, scale);
 
         gridContainer.Columns = _gridHeight;
         Vector2 textureSize = Vector2.Zero;
@@ -68,7 +70,7 @@ public class Gameplay : Control
         gridContainer.AnchorTop = 0.5f;
         gridContainer.AnchorBottom = 0.5f;
 
-        var totalTextureSize = new Vector2(textureSize.x * _gridHeight, textureSize.y * _gridWidth);
+        var totalTextureSize = new Vector2(textureSize.x * _gridHeight * scale, textureSize.y * _gridWidth * scale);
 
         gridContainer.MarginLeft = -totalTextureSize.x / 2;
         gridContainer.MarginRight = totalTextureSize.x / 2;
