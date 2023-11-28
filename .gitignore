@@ -19,3 +19,6 @@ mono_crash.*.json
 
 # Affinity Designer specific ignores
 *.afdesign~lock~
+
+# export folder
+export/
