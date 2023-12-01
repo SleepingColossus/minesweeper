@@ -8,6 +8,10 @@ Minesweeper game made using Godot 3.5.3 and C#.
 
 Godot version 3.x was chosen over 4.x due to superior support for the web as of the time of development.
 
+## Play
+
+You can play the game directly in your web browser on [itch.o](https://sleepingcolossus.itch.io/minesweeper)
+
 ## Features
 
 * Three classic modes
